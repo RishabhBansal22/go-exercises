@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+//todo:
+// 1. implement pointers
+// 2. change map to {"isbn":{"price":"22","author":"dale"}}
+// 3. implement interface and methods
+// 4. transform into cli application
+
 //map of books; key = isbn, val = book title
 var lib = map[string]string{
 	"12a34": "verity",
@@ -25,15 +31,29 @@ func AddBook(lib, newBooks map[string]string) {
 	fmt.Printf("%d books added to library\n", count)
 }
 
-func main() {
-	book := map[string]string{
-		"33a44": "metamorphosis",
-		"23d44": "golang-class",
-		"44255": "remmeber me",
+func DeleteBook(lib map[string]string, isbn []string) {
+	for _, val := range isbn {
+		if _, ok := lib[val]; ok {
+			delete(lib, val)
+			fmt.Printf("%s removed from library\n", val)
+
+		} else {
+			fmt.Println("book does not exist\n")
+		}
 	}
 
-	AddBook(lib, book)
-	// AddBook(lib, book)
-	fmt.Println(lib)
+}
+
+func GetBook(lib map[string]string, isbn string) string {
+	if val, ok := lib[isbn]; ok {
+		return val
+	} else {
+		return "book does not exists"
+	}
+}
+func main() {
+
+	res := GetBook(lib, "12a34")
+	fmt.Println(res)
 
 }

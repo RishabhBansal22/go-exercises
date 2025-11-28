@@ -2,31 +2,38 @@ package main
 
 import "fmt"
 
-var v = make(map[string]int)
+//map of books; key = isbn, val = book title
+var lib = map[string]string{
+	"12a34": "verity",
+	"23b45": "funk",
+	"44c89": "how to win friends",
+}
 
-var n = "rishabh"
-var r *string = &n
+//function to add book in lib map
+func AddBook(lib, newBooks map[string]string) {
+	count := 0
+	for i, val := range newBooks {
+		if _, ok := lib[i]; ok {
+			fmt.Println("book already exists")
+		} else {
+			lib[i] = val
+			fmt.Printf("book %s added to library\n", i)
+			count++
+		}
 
-var book = map[string]map[string]int{
-	"python": {
-		"first": 1,
-	},
-	"c": {
-		"first": 0,
-	},
+	}
+	fmt.Printf("%d books added to library\n", count)
 }
 
 func main() {
-	v = map[string]int{
-		"python": 1,
-		"c":      2,
+	book := map[string]string{
+		"33a44": "metamorphosis",
+		"23d44": "golang-class",
+		"44255": "remmeber me",
 	}
-	lan, ok := v["java"]
-	if ok {
-		fmt.Println(lan)
-	} else {
-		fmt.Println("key does not exists", ok)
-	}
-	fmt.Println(book["python"]["first"])
+
+	AddBook(lib, book)
+	// AddBook(lib, book)
+	fmt.Println(lib)
 
 }
